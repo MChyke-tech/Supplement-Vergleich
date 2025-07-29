@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protein Vergleich – Fitness Supplements</title>
+  <style>
+    :root {
+      --primary-bg: #0d2a47;
+      --secondary-bg: #132f4d;
+      --accent: #ff4d3b;
+      --text-light: #ffffff;
+      --text-muted: #d0d6dc;
+      --positive: #28a745;
+      --negative: #dc3545;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-light);
+      padding-bottom: 2rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: var(--secondary-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    .sort-bar {
+      text-align: center;
+      margin: 1rem;
+    }
+
+    .sort-select {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      background: var(--secondary-bg);
+      color: var(--text-light);
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .product-card {
+      background: var(--secondary-bg);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    .product-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-header h2 {
+      font-size: 1.2rem;
+    }
+
+    .price {
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .rating {
+      font-size: 0.9rem;
+      color: gold;
+    }
+
+    .tags {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+    }
+    .positive {
+      background: var(--positive);
+    }
+    .negative {
+      background: var(--negative);
+    }
+
+    .nutrition {
+      margin-top: 0.5rem;
+    }
+
+    .nutrition-button {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .nutrition-table {
+      margin-top: 0.5rem;
+      background: #0b2238;
+      border-radius: 5px;
+      padding: 0.5rem;
+      display: none;
+    }
+
+    .nutrition-table table {
+      width: 100%;
+      font-size: 0.8rem;
+      border-collapse: collapse;
+    }
+
+    .nutrition-table td {
+      padding: 0.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Protein Vergleich</h1>
+</header>
+
+<div class="sort-bar">
+  <label for="sort">Sortieren nach: </label>
+  <select id="sort" class="sort-select">
+    <option value="name">Name (A-Z)</option>
+    <option value="price">Preis</option>
+    <option value="rating">Bewertung</option>
+  </select>
+</div>
+
+<div class="product-list" id="productList">
+  <!-- Produkt 1 -->
+  <div class="product-card" data-name="ESN Designer Whey" data-price="24.99" data-rating="4.5">
+    <div class="product-header">
+      <h2>ESN Designer Whey</h2>
+      <div>
+        <span class="price">24,99 €</span><br>
+        <span class="rating">★★★★☆ (4.5)</span>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag positive">Gute Löslichkeit</span>
+      <span class="tag positive">Hohe Qualität</span>
+    </div>
+    <div class="nutrition">
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Nährwerte anzeigen</button>
+      <div class="nutrition-table">
+        <table>
+          <tr><td>Protein</td><td>78g</td></tr>
+          <tr><td>Kohlenhydrate</td><td>5g</td></tr>
+          <tr><td>Fett</td><td>3g</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Produkt 2 -->
+  <div class="product-card" data-name="MyProtein Impact Whey" data-price="19.99" data-rating="4.0">
+    <div class="product-header">
+      <h2>MyProtein Impact Whey</h2>
+      <div>
+        <span class="price">19,99 €</span><br>
+        <span class="rating">★★★★☆ (4.0)</span>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag positive">Preis-Leistung</span>
+      <span class="tag negative">Künstlicher Geschmack</span>
+    </div>
+    <div class="nutrition">
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Nährwerte anzeigen</button>
+      <div class="nutrition-table">
+        <table>
+          <tr><td>Protein</td><td>75g</td></tr>
+          <tr><td>Kohlenhydrate</td><td>6g</td></tr>
+          <tr><td>Fett</td><td>4g</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Produkt 3 -->
+  <div class="product-card" data-name="Optimum Nutrition Gold Standard" data-price="29.99" data-rating="4.7">
+    <div class="product-header">
+      <h2>Optimum Nutrition Gold Standard</h2>
+      <div>
+        <span class="price">29,99 €</span><br>
+        <span class="rating">★★★★★ (4.7)</span>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag positive">Sehr hohe Qualität</span>
+      <span class="tag negative">Hoher Preis</span>
+    </div>
+    <div class="nutrition">
+      <button class="nutrition-button" onclick="toggleNutrition(this)">Nährwerte anzeigen</button>
+      <div class="nutrition-table">
+        <table>
+          <tr><td>Protein</td><td>80g</td></tr>
+          <tr><td>Kohlenhydrate</td><td>4g</td></tr>
+          <tr><td>Fett</td><td>3g</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nährwert-Tabelle toggeln
+  function toggleNutrition(button) {
+    const table = button.nextElementSibling;
+    table.style.display = table.style.display === 'block' ? 'none' : 'block';
+    button.textContent = table.style.display === 'block' ? 'Nährwerte ausblenden' : 'Nährwerte anzeigen';
+  }
+
+  // Sortierung
+  const sortSelect = document.getElementById('sort');
+  const productList = document.getElementById('productList');
+
+  sortSelect.addEventListener('change', () => {
+    const products = Array.from(productList.children);
+    const sortValue = sortSelect.value;
+
+    products.sort((a, b) => {
+      if (sortValue === 'name') {
+        return a.dataset.name.localeCompare(b.dataset.name);
+      }
+      if (sortValue === 'price') {
+        return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      }
+      if (sortValue === 'rating') {
+        return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+      }
+    });
+
+    productList.innerHTML = '';
+    products.forEach(product => productList.appendChild(product));
+  });
+</script>
+
+</body>
+</html>
