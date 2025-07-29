@@ -115,7 +115,6 @@
     .card img {
       max-width: 80px;
       margin-bottom: 0.5rem;
-      animation: fadeIn 0.8s ease;
     }
 
     .card span {
@@ -153,10 +152,37 @@
       color: var(--text-muted);
     }
 
-    /* Animationen */
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* Quiz Modal */
+    .quiz-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .quiz-content {
+      background: var(--secondary-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 400px;
+      text-align: center;
+    }
+    .quiz-content h3 {
+      margin-bottom: 1rem;
+    }
+    .quiz-content button {
+      background-color: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
     /* Mobile optimiert */
@@ -177,8 +203,8 @@
 
   <header>
     <h1>Fitness Supplements Vergleichen</h1>
-    <p>Finde deinen perfekten Supplement-Stack in 30 Sekunden</p>
-    <button class="cta-button">Zum Quiz</button>
+    <p>Finde dein perfektes Supplement in 30 Sekunden</p>
+    <button class="cta-button" id="openQuiz">Zum Quiz</button>
   </header>
 
   <nav>
@@ -188,7 +214,7 @@
   </nav>
 
   <section id="trending" class="section">
-    <h2>Trending Now</h2>
+    <h2>Trending Now <small id="liveUsers" style="font-size:0.8rem; color:var(--accent);"></small></h2>
     <div class="trend-container">
       <div class="card">
         <img src="https://via.placeholder.com/80?text=Whey" alt="Whey Protein">
@@ -202,26 +228,24 @@
         <img src="https://via.placeholder.com/80?text=Creatine" alt="Creatine">
         <span>Creatine</span>
       </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/80?text=Omega3" alt="Omega-3">
-        <span>Vegane Omega-3</span>
-      </div>
     </div>
   </section>
 
   <section id="categories" class="section">
-    <div class="category-container">
-      <div class="card">
+    <h2>Kategorien <small style="font-size:0.8rem; color:var(--text-muted);">(Filter Preis: <span id="priceFilterValue">Alle</span>)</small></h2>
+    <input type="range" id="priceFilter" min="10" max="100" value="100" style="width:100%;margin-bottom:1rem;">
+    <div class="category-container" id="categoryList">
+      <div class="card" data-price="50">
         <img src="https://via.placeholder.com/80?text=Protein" alt="Protein Icon">
-        <span>Protein</span>
+        <span>Protein (€50)</span>
       </div>
-      <div class="card">
+      <div class="card" data-price="30">
         <img src="https://via.placeholder.com/80?text=Booster" alt="Booster Icon">
-        <span>Booster</span>
+        <span>Booster (€30)</span>
       </div>
-      <div class="card">
+      <div class="card" data-price="70">
         <img src="https://via.placeholder.com/80?text=Kreatin" alt="Kreatin Icon">
-        <span>Kreatin</span>
+        <span>Kreatin (€70)</span>
       </div>
     </div>
   </section>
@@ -238,6 +262,46 @@
   <footer>
     © 2025 Fitness Supplements Vergleichen – Alle Rechte vorbehalten
   </footer>
+
+  <!-- Quiz Modal -->
+  <div class="quiz-modal" id="quizModal">
+    <div class="quiz-content">
+      <h3>Dein Ziel?</h3>
+      <button onclick="alert('Empfehlung: Whey Protein')">Muskelaufbau</button>
+      <button onclick="alert('Empfehlung: Booster')">Mehr Energie</button>
+      <button onclick="alert('Empfehlung: Omega-3 + Vitamine')">Gesundheit</button>
+      <br><br>
+      <button onclick="document.getElementById('quizModal').style.display='none'">Schließen</button>
+    </div>
+  </div>
+
+<script>
+  // Quiz Popup öffnen
+  document.getElementById('openQuiz').addEventListener('click', () => {
+    document.getElementById('quizModal').style.display = 'flex';
+  });
+
+  // Live User Simulation (Social Proof)
+  function updateLiveUsers() {
+    const users = Math.floor(Math.random() * (120 - 50 + 1)) + 50;
+    document.getElementById('liveUsers').innerText = `(${users} Nutzer gerade aktiv)`;
+  }
+  setInterval(updateLiveUsers, 3000);
+  updateLiveUsers();
+
+  // Preisfilter
+  const priceFilter = document.getElementById('priceFilter');
+  const priceValue = document.getElementById('priceFilterValue');
+  const categoryList = document.getElementById('categoryList').children;
+
+  priceFilter.addEventListener('input', () => {
+    priceValue.innerText = `Bis €${priceFilter.value}`;
+    Array.from(categoryList).forEach(card => {
+      const price = parseInt(card.getAttribute('data-price'));
+      card.style.display = price <= priceFilter.value ? 'block' : 'none';
+    });
+  });
+</script>
 
 </body>
 </html>
