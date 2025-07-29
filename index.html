@@ -232,20 +232,35 @@
   </section>
 
   <section id="categories" class="section">
-    <h2>Kategorien <small style="font-size:0.8rem; color:var(--text-muted);">(Filter Preis: <span id="priceFilterValue">Alle</span>)</small></h2>
-    <input type="range" id="priceFilter" min="10" max="100" value="100" style="width:100%;margin-bottom:1rem;">
-    <div class="category-container" id="categoryList">
-      <div class="card" data-price="50">
+    <h2>Kategorien</h2>
+    <div class="category-container">
+      <div class="card">
         <img src="https://via.placeholder.com/80?text=Protein" alt="Protein Icon">
-        <span>Protein (€50)</span>
+        <span>Protein</span>
       </div>
-      <div class="card" data-price="30">
+      <div class="card">
         <img src="https://via.placeholder.com/80?text=Booster" alt="Booster Icon">
-        <span>Booster (€30)</span>
+        <span>Booster</span>
       </div>
-      <div class="card" data-price="70">
+      <div class="card">
         <img src="https://via.placeholder.com/80?text=Kreatin" alt="Kreatin Icon">
-        <span>Kreatin (€70)</span>
+        <span>Kreatin</span>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/80?text=Vitalstoffe" alt="Vitalstoffe Icon">
+        <span>Vitalstoffe</span>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/80?text=MealPrep" alt="Meal Prep Icon">
+        <span>Meal Prep</span>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/80?text=Recovery" alt="Recovery Icon">
+        <span>Recovery</span>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/80?text=Snacks" alt="Snacks Icon">
+        <span>Snacks</span>
       </div>
     </div>
   </section>
@@ -288,19 +303,6 @@
   }
   setInterval(updateLiveUsers, 3000);
   updateLiveUsers();
-
-  // Preisfilter
-  const priceFilter = document.getElementById('priceFilter');
-  const priceValue = document.getElementById('priceFilterValue');
-  const categoryList = document.getElementById('categoryList').children;
-
-  priceFilter.addEventListener('input', () => {
-    priceValue.innerText = `Bis €${priceFilter.value}`;
-    Array.from(categoryList).forEach(card => {
-      const price = parseInt(card.getAttribute('data-price'));
-      card.style.display = price <= priceFilter.value ? 'block' : 'none';
-    });
-  });
 </script>
 
 </body>
