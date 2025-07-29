@@ -29,16 +29,32 @@
     }
 
     header {
-      text-align: center;
-      padding: 1.5rem 1rem;
       background: var(--secondary-bg);
+      padding: 1rem;
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     header h1 {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
+    }
+
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.1);
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(255,255,255,0.2);
     }
 
     .sort-bar {
@@ -144,6 +160,7 @@
 <body>
 
 <header>
+  <a href="index.html" class="back-link">← Zurück</a>
   <h1>Protein Vergleich</h1>
 </header>
 
@@ -174,6 +191,7 @@
       <button class="nutrition-button" onclick="toggleNutrition(this)">Nährwerte anzeigen</button>
       <div class="nutrition-table">
         <table>
+          <tr><td>Kcal</td><td>390</td></tr>
           <tr><td>Protein</td><td>78g</td></tr>
           <tr><td>Kohlenhydrate</td><td>5g</td></tr>
           <tr><td>Fett</td><td>3g</td></tr>
@@ -199,6 +217,7 @@
       <button class="nutrition-button" onclick="toggleNutrition(this)">Nährwerte anzeigen</button>
       <div class="nutrition-table">
         <table>
+          <tr><td>Kcal</td><td>380</td></tr>
           <tr><td>Protein</td><td>75g</td></tr>
           <tr><td>Kohlenhydrate</td><td>6g</td></tr>
           <tr><td>Fett</td><td>4g</td></tr>
@@ -224,6 +243,7 @@
       <button class="nutrition-button" onclick="toggleNutrition(this)">Nährwerte anzeigen</button>
       <div class="nutrition-table">
         <table>
+          <tr><td>Kcal</td><td>395</td></tr>
           <tr><td>Protein</td><td>80g</td></tr>
           <tr><td>Kohlenhydrate</td><td>4g</td></tr>
           <tr><td>Fett</td><td>3g</td></tr>
