@@ -35,15 +35,19 @@
       top: 0;
       z-index: 100;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     header h1 {
       font-size: 1.4rem;
+      text-align: center;
     }
 
     .back-link {
+      position: absolute;
+      left: 1rem;
       color: var(--accent);
       text-decoration: none;
       font-size: 0.9rem;
@@ -138,11 +142,17 @@
     }
 
     .nutrition-table {
-      margin-top: 0.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
       background: #0b2238;
       border-radius: 5px;
+      padding: 0 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .nutrition-table.open {
+      max-height: 200px;
       padding: 0.5rem;
-      display: none;
     }
 
     .nutrition-table table {
@@ -155,12 +165,22 @@
       padding: 0.2rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
+
+    @media (max-width: 600px) {
+      .product-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .price, .rating {
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="index.html" class="back-link">Zurück</a>
+  <a href="index.html" class="back-link">⬅ Zurück</a>
   <h1>Protein Vergleich</h1>
 </header>
 
@@ -254,11 +274,13 @@
 </div>
 
 <script>
-  // Nährwert-Tabelle toggeln
+  // Nährwert-Tabelle toggeln (mit Animation)
   function toggleNutrition(button) {
     const table = button.nextElementSibling;
-    table.style.display = table.style.display === 'block' ? 'none' : 'block';
-    button.textContent = table.style.display === 'block' ? 'Nährwerte ausblenden' : 'Nährwerte anzeigen';
+    table.classList.toggle('open');
+    button.textContent = table.classList.contains('open')
+      ? 'Nährwerte ausblenden'
+      : 'Nährwerte anzeigen';
   }
 
   // Sortierung
